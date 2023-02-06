@@ -1,0 +1,19 @@
+name: CI/CD PowerShell Gallery
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Publish PSJet to PowerShell Gallery
+        shell: pwsh
+        run: Publish-Module -Path .\src\Modules\PSJet\ -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_NUGET_APIKEY }}
