@@ -16,4 +16,4 @@ jobs:
 
       - name: Publish PSJet to PowerShell Gallery
         shell: pwsh
-        run: Publish-Module -Path .\src\Modules\PSJet\ -NuGetApiKey @{{ secrets.POWERSHELL_GALLERY_NUGET_APIKEY }}
+        run: Publish-Module -Path .\src\Modules\PSJet\ -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_NUGET_APIKEY }}
