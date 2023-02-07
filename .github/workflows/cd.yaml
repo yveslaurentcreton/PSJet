@@ -1,4 +1,4 @@
-name: CI/CD PowerShell Gallery
+name: CD PowerShell Gallery
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Fetch unshallow
         run: git fetch --unshallow
-        
+
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.7
         with:
@@ -31,7 +31,7 @@ jobs:
         run: |
           $version = ${{ steps.gitversion.outputs.majorMinorPatch }}
           $prerelease = ${{ steps.gitversion.outputs.nuGetPreReleaseTagV2 }}
-          $manifestFile = .\src\Modules\PSJet\PSJet.psd1
+          $manifestFile = Get-ChildItem .\src\Modules\PSJet\PSJet.psd1
           (((Get-Content $manifestFile -Raw) -replace '[[version]]', $version) -replace '[[prerelease]]', $prerelease) | Set-Content $manifestFile
 
       - name: Publish PSJet to PowerShell Gallery
