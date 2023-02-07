@@ -20,7 +20,7 @@ jobs:
 
     - name: Display SemVer
       run: |
-        echo "SemVer: $GITVERSION_SEMVER"
+        echo "SemVer: ${{ GITVERSION_SEMVER }}"
         echo "Major: ${{ steps.gitversion.outputs.major }}"
         echo "Minor: ${{ steps.gitversion.outputs.minor }}"
         echo "Patch: ${{ steps.gitversion.outputs.patch }}"
