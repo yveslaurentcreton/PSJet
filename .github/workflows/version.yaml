@@ -12,10 +12,11 @@ jobs:
     name: versiontest
     runs-on: ubuntu-latest
     steps:
-    # gitversion/setup@v0.9.7 action omitted for brevity.
-
-    - name: Determine Version
-      uses: gittools/actions/gitversion/execute@v0.9.7
+    
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.7
+      with:
+        versionSpec: '5.x'
 
     - name: Display SemVer
       run: |
