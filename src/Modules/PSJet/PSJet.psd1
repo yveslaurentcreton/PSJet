@@ -12,7 +12,7 @@
 RootModule = '.\PSJet.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0.2'
+ModuleVersion = '[[version]]'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -114,7 +114,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # Prerelease string of this module
-        # Prerelease = ''
+        Prerelease = '[[prerelease]]'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false

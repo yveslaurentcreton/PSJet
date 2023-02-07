@@ -2,8 +2,7 @@ name: CI/CD PowerShell Gallery
 
 on:
   push:
-    branches:
-      - "main"
+    branches: ["main", "develop"]
 
 jobs:
   build:
@@ -13,6 +12,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
+        with:
+          versionSpec: '5.x'
+
+      - name: Run GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9.7
+        with:
+          versionSpec: '5.x'
+
+      - name: Apply version to PSJet manifest
+        shell: pwsh
+        run: |
+          $version = ${{ steps.gitversion.outputs.majorMinorPatch }}
+          $prerelease = ${{ steps.gitversion.outputs.nuGetPreReleaseTagV2 }}
+          $manifestFile = .\src\Modules\PSJet\PSJet.psd1
+          (((Get-Content $manifestFile -Raw) -replace '[[version]]', $version) -replace '[[prerelease]]', $prerelease) | Set-Content $manifestFile
 
       - name: Publish PSJet to PowerShell Gallery
         shell: pwsh
