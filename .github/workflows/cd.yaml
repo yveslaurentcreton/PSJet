@@ -19,20 +19,20 @@ jobs:
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.7
         with:
-          versionSpec: '5.x'
+          versionSpec: "5.x"
 
       - name: Run GitVersion
         uses: gittools/actions/gitversion/execute@v0.9.7
         with:
-          versionSpec: '5.x'
+          versionSpec: "5.x"
 
       - name: Apply version to PSJet manifest
         shell: pwsh
         run: |
-          $version = ${{ env.GitVersion_MajorMinorPatch }}
-          $prerelease = ${{ env.GitVersion_NuGetPreReleaseTagV2 }}
-          $manifestFile = Get-ChildItem .\src\Modules\PSJet\PSJet.psd1
-          (((Get-Content $manifestFile -Raw) -replace '[[version]]', $version) -replace '[[prerelease]]', $prerelease) | Set-Content $manifestFile
+          $version = "${{ env.GitVersion_MajorMinorPatch }}"
+          $prerelease = "${{ env.GitVersion_NuGetPreReleaseTagV2 }}"
+          $manifestFile = Get-ChildItem ".\src\Modules\PSJet\PSJet.psd1"
+          (((Get-Content $manifestFile -Raw) -replace "[[version]]", $version) -replace "[[prerelease]]", $prerelease) | Set-Content $manifestFile
 
       - name: Publish PSJet to PowerShell Gallery
         shell: pwsh
