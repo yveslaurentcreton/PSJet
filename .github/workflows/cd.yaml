@@ -32,7 +32,10 @@ jobs:
           $version = "${{ env.GitVersion_MajorMinorPatch }}"
           $prerelease = "${{ env.GitVersion_NuGetPreReleaseTagV2 }}"
           $manifestFile = Get-ChildItem ".\src\Modules\PSJet\PSJet.psd1"
-          (((Get-Content $manifestFile -Raw) -replace "[[version]]", $version) -replace "[[prerelease]]", $prerelease) | Set-Content $manifestFile
+          $content = Get-Content $manifestFile -Raw
+          $content = $content.Replace("[[version]]", $version);
+          $content = $content.Replace("[[prerelease]]", $prerelease);
+          Set-Content -Value $content -Path $manifestFile
 
       - name: Publish PSJet to PowerShell Gallery
         shell: pwsh
