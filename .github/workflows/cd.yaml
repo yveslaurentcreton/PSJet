@@ -29,8 +29,8 @@ jobs:
       - name: Apply version to PSJet manifest
         shell: pwsh
         run: |
-          $version = ${{ steps.gitversion.outputs.majorMinorPatch }}
-          $prerelease = ${{ steps.gitversion.outputs.nuGetPreReleaseTagV2 }}
+          $version = $GitVersion_MajorMinorPatch
+          $prerelease = $GitVersion_NuGetPreReleaseTagV2
           $manifestFile = Get-ChildItem .\src\Modules\PSJet\PSJet.psd1
           (((Get-Content $manifestFile -Raw) -replace '[[version]]', $version) -replace '[[prerelease]]', $prerelease) | Set-Content $manifestFile
 
