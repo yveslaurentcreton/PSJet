@@ -70,10 +70,17 @@ PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-        'Invoke-ElevateAsAdminPowerShell',
-        'Invoke-ElevateAsAdminWindowsPowerShell',
-        'Invoke-RemoteApp'
-    )
+    'Invoke-ElevateAsAdminPowerShell.ps1',
+    'Invoke-ElevateAsAdminWindowsPowerShell.ps1',
+    'Invoke-RemoteApp.ps1',
+    'Add-TrustedHost.ps1',
+    'Get-DownloadsFolder.ps1',
+    'Get-HostName.ps1',
+    'Get-InvocationScriptName.ps1',
+    'Get-IsElevatedAsAdmin.ps1',
+    'Install-GitHubRelease.ps1',
+    'Invoke-DownloadGitHubRelease.ps1'
+)
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
