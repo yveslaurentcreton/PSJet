@@ -18,6 +18,11 @@ jobs:
       with:
         versionSpec: '5.x'
 
+    - name: Run GitVersion
+      uses: gittools/actions/gitversion/execute@v0.9.7
+      with:
+        versionSpec: '5.x'
+
     - name: Display SemVer
       run: |
         echo "SemVer: ${{ GITVERSION_SEMVER }}"
