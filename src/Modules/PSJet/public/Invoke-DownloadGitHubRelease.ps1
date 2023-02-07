@@ -46,15 +46,16 @@ function Invoke-DownloadGitHubRelease {
         [string]$Tag
     )
 
-    if ($null -eq $Tag) {
-        $tagSuffix = "latest"
+    if ($Tag) {
+        $tagSuffix = "tags/$($Tag)"
     }
     else {
-        $tagSuffix = "tags/$($Tag)"
+        $tagSuffix = "latest"
     }
 
     $downloadFolder = Get-DownloadsFolder
-    $latestPowerShellRelease = Invoke-RestMethod -Uri "https://api.github.com/repos/$Owner/$Repository/releases/{$tagSuffix}}" -Method Get
+    $url = "https://api.github.com/repos/$Owner/$Repository/releases/$tagSuffix"
+    $latestPowerShellRelease = Invoke-RestMethod -Uri $url -Method Get
     $latestPowerShellInstaller = $latestPowerShellRelease.assets | Where-Object Name -Like $Asset
     $downloadFileName = Join-Path -Path $downloadFolder -ChildPath $latestPowerShellInstaller.name
 
