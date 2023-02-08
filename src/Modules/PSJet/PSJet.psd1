@@ -80,6 +80,7 @@ FunctionsToExport = @(
     'Get-HostName',
     'Get-InvocationScriptName',
     'Get-IsElevatedAsAdmin',
+    'Get-VMIpAddress',
     'Install-GitHubRelease',
     'Invoke-DownloadGitHubRelease'
 )

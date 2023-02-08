@@ -1,20 +1,18 @@
 ﻿<#
     .SYNOPSIS
-    This function allows the user to launch a remote application on a remote computer.
+    This function launches a remote application on a remote computer using Remote Desktop Protocol.
 
     .DESCRIPTION
-    The function creates a Remote Desktop Protocol (.rdp) file and launches it with the specified ComputerName, UserName, and Application parameters.
-    The .rdp file is generated using a template that is configured with the specified parameters, including the remote computer name, username, and the application to run on the remote computer.
-    The generated .rdp file is stored in a temporary location and then launched, allowing the user to connect to the remote computer and run the specified application.
+    The function creates a Remote Desktop Protocol (.rdp) file with the specified parameters, including the remote computer name, username, and the application to run on the remote computer. The parameters are configured using a template. The generated .rdp file is stored in a temporary location and then launched, connecting the user to the remote computer and running the specified application.
 
     .PARAMETER ComputerName
-    The name or IP address of the remote computer to connect to.
+    The name or IP address of the remote computer to connect to. This parameter is optional and will default to a running Hyper-V Virtual Machine if not provided.
 
     .PARAMETER UserName
-    The username to use for the remote connection.
+    The username to use for the remote connection. This parameter is mandatory.
 
     .PARAMETER Application
-    The application to run on the remote computer.
+    The application to run on the remote computer. This parameter is mandatory.
 
     .NOTES
     This function requires the Remote Desktop Connection client to be installed on the local machine.
@@ -25,13 +23,17 @@
 #>
 function Invoke-RemoteApp {
     param (
-        [Parameter(Mandatory)]
+        [Parameter()]
         [string]$ComputerName,
         [Parameter(Mandatory)]
         [string]$UserName,
         [Parameter(Mandatory)]
         [string]$Application
     )
+
+    if (-not $ComputerName) {
+        $ComputerName = Get-VMIpAddress
+    }
 
     $remoteAppContent = @"
 screen mode id:i:1
