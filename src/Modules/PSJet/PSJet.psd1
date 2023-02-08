@@ -51,13 +51,13 @@ PowerShellVersion = '5.1'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-# RequiredModules = @()
+RequiredModules = @('MSI')
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-# ScriptsToProcess = @()
+ScriptsToProcess = @('.\setup\PreInstall.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -81,9 +81,11 @@ FunctionsToExport = @(
     'Get-InvocationScriptName',
     'Get-IsElevatedAsAdmin',
     'Get-VMIpAddress',
+    'Install-Chocolatey',
     'Install-GitHubRelease',
     'Invoke-DownloadGitHubRelease',
-    'New-ShortCut'
+    'New-ShortCut',
+    'Register-AppAsAdmin'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
