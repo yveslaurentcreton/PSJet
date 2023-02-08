@@ -8,7 +8,7 @@
     .PARAMETER None
 
     .EXAMPLE
-    Invoke-ElevateAsAdminWindowsPowerShell
+    Invoke-ElevateWindowsPowerShellAsAdmin
 
     .NOTES
     The function uses the BuildNumber property of the Win32_OperatingSystem CIM class to determine if the operating system is Windows Vista or later. The function uses the Start-Process cmdlet to start a new process of Windows PowerShell with administrator privileges.
@@ -16,15 +16,14 @@
     .OUTPUTS
     None
 #>
-function Invoke-ElevateAsAdminWindowsPowerShell {
-
-    $scriptFilename = Get-InvocationScriptName
+function Invoke-ElevateWindowsPowerShellAsAdmin {
 
     if (-Not (Get-IsElevatedAsAdmin))
     {
         if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000)
         {
-            Start-Process powershell -Verb RunAs -ArgumentList "-ExecutionPolicy Bypass -File `"$($scriptFilename)`""
+            $scriptFilename = Get-InvocationScriptName
+            Invoke-WindowsPowerShellAsAdmin -Script $scriptFilename
             Exit
         }
     }
