@@ -57,7 +57,7 @@ RequiredModules = @('MSI')
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @('.\setup\Clean.ps1', '.\setup\PreInstall.ps1')
+ScriptsToProcess = @('.\setup\PreInstall.ps1')
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
