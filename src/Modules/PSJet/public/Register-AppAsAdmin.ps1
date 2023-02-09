@@ -21,7 +21,7 @@ function Register-AppAsAdmin {
         [Parameter(Mandatory)]
         [string]$ApplicationFilename
     )
-    
+
     $path = "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"
 
     New-Item -Path $path -ErrorAction SilentlyContinue

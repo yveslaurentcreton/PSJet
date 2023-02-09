@@ -28,11 +28,18 @@ function Invoke-RemoteApp {
         [Parameter(Mandatory)]
         [string]$UserName,
         [Parameter(Mandatory)]
-        [string]$Application
+        [string]$Application,
+        [Parameter()]
+        [securestring]$EncryptedPassword
     )
 
     if (-not $ComputerName) {
         $ComputerName = Get-VMIpAddress
+    }
+
+    $passwordLine = "password 51:b:[[encryptedPassword]]"
+    if ($EncryptedPassword) {
+        $passwordLine = "password 51:b:[[encryptedPassword]]"
     }
 
     $remoteAppContent = @"
@@ -85,12 +92,14 @@ use redirection server name:i:0
 rdgiskdcproxy:i:0
 kdcproxyname:s:
 username:s:[[userName]]
+$($passwordLine)
 "@
 
     $content = $remoteAppContent;
     $content = $content.Replace("[[computerName]]", $ComputerName);
     $content = $content.Replace("[[userName]]", $UserName);
     $content = $content.Replace("[[application]]", $Application);
+    $content = $content.Replace("[[encryptedPassword]]", (ConvertFrom-SecureString $EncryptedPassword));
 
     # Generate rdp filename
     $tmpFile = New-TemporaryFile

@@ -10,7 +10,7 @@
 
     Output:
     10.0.0.5
-    
+
     .NOTES
     This function assumes that virtual machines have at least one network adapter and that the adapter has an assigned IP address.
 #>

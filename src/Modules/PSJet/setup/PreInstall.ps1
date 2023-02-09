@@ -4,6 +4,6 @@
 $module = Get-Module -Name MSI -ListAvailable
 
 # If the module is not installed, install it
-if ($module -eq $null) {
+if ($null -eq $module) {
     Install-Module -Name MSI -Force
 }

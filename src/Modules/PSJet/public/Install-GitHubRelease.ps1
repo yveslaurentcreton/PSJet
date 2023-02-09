@@ -3,8 +3,8 @@
     Installs the specified GitHub release asset
 
     .DESCRIPTION
-    The Install-GitHubRelease function downloads and installs the specified GitHub release asset. 
-    The function uses Invoke-DownloadGitHubRelease function to download the asset and Install-MSIProduct function to install it. 
+    The Install-GitHubRelease function downloads and installs the specified GitHub release asset.
+    The function uses Invoke-DownloadGitHubRelease function to download the asset and Install-MSIProduct function to install it.
 
     .PARAMETER Owner
     The name of the GitHub user or organization that owns the repository.
@@ -16,7 +16,7 @@
     The name of the asset to be downloaded and installed.
 
     .PARAMETER Tag
-    The tag or version of the release that contains the asset. 
+    The tag or version of the release that contains the asset.
     If not specified, the latest release will be used.
 
     .EXAMPLE

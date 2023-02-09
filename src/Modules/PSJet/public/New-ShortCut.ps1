@@ -21,13 +21,18 @@
 #>
 
 function New-Shortcut {
+    [CmdletBinding(SupportsShouldProcess=$True, ConfirmImpact='Low')]
     param (
         [Parameter(Mandatory)]
         [string]$SourceFileLocation,
         [Parameter(Mandatory)]
         [string]$ShortcutLocation
     )
-    
+
+    if (!(ShouldProcess $ShortcutLocation "Create Shortcut")) {
+        return
+    }
+
     $WScriptShell = New-Object -ComObject WScript.Shell
     $Shortcut = $WScriptShell.CreateShortcut($ShortcutLocation)
     $Shortcut.TargetPath = $SourceFileLocation
