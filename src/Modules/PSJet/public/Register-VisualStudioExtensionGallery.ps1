@@ -42,7 +42,7 @@ function Register-VisualStudioExtensionGallery {
         $visualStudioInstance = $visualStudioRegistry.Directory
         $visualStudioVersion = $visualStudioInstance.BaseName;
         $repositoryPath = $repositoryTemplatePath.Replace("[[VS_VERSION]]", $visualStudioVersion)
-        $galleryPath = Join-Path -Path $repositoryPath -ChildPath $newGuid
+        $galleryPath = Join-Path -Path $repositoryPath -ChildPath "{$($newGuid)}"
         $instancePath = "HKLM\_TMPVS_$($visualStudioVersion)"
 
         # Load the visual studio hive
