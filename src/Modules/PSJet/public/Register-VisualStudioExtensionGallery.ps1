@@ -24,7 +24,8 @@ function Register-VisualStudioExtensionGallery {
         [Parameter(Mandatory)]
         [string]$GalleryName,
         [Parameter(Mandatory)]
-        [string]$GalleryUrl
+        [string]$GalleryUrl,
+        [switch]$IsSharepointGallery = $false
     )
 
     if ([System.IO.File]::Exists($GalleryUrl)) {
@@ -44,20 +45,22 @@ function Register-VisualStudioExtensionGallery {
         $repositoryPath = $repositoryTemplatePath.Replace("[[VS_VERSION]]", $visualStudioVersion)
         $galleryPath = Join-Path -Path $repositoryPath -ChildPath "{$($newGuid)}"
         $instancePath = "HKLM\_TMPVS_$($visualStudioVersion)"
+        $protocol = if ($IsSharepointGallery) { "Sharepoint" } else { "Atom Feed" }
 
         # Load the visual studio hive
-        & reg load "$($instancePath)" "$($visualStudioRegistry.FullName)"
+        [gc]::collect()
+        & reg load "$($instancePath)" "$($visualStudioRegistry.FullName)" | Out-Null
 
         # Add the registry
         New-Item -Path $galleryPath -Force | Out-Null
         Set-ItemProperty -Path $galleryPath -Name "(Default)" -Value $encodedGalleryUrl
         Set-ItemProperty -Path $galleryPath -Name "Priority" -Value 100
-        Set-ItemProperty -Path $galleryPath -Name "Protocol" -Value ""
+        Set-ItemProperty -Path $galleryPath -Name "Protocol" -Value $protocol
         Set-ItemProperty -Path $galleryPath -Name "DisplayName" -Value $GalleryName
 
         # Unload the visual studio hive
         0 | Out-Null
         [gc]::collect()
-        & reg unload "$($instancePath)"
+        & reg unload "$($instancePath)" | Out-Null
     }
 }
