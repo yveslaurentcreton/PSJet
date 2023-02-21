@@ -28,11 +28,12 @@ function Register-VisualStudioExtensionGallery {
         [switch]$IsSharepointGallery = $false
     )
 
+    $galleryUrl = $GalleryUrl.Replace("\", "/")
     if ([System.IO.File]::Exists($GalleryUrl)) {
-        $encodedGalleryUrl = "file://{0}" -f [System.Uri]::EscapeUriString((Convert-Path $GalleryUrl))
+        $encodedGalleryUrl = "file://{0}" -f [System.Uri]::EscapeUriString($galleryUrl)
     }
     else {
-        $encodedGalleryUrl = [System.Uri]::EscapeUriString($GalleryUrl)
+        $encodedGalleryUrl = [System.Uri]::EscapeUriString($galleryUrl)
     }
 
     $newGuid = New-Guid;
@@ -64,3 +65,4 @@ function Register-VisualStudioExtensionGallery {
         & reg unload "$($instancePath)" | Out-Null
     }
 }
+Register-VisualStudioExtensionGallery -GalleryName "yvcrelast2" -GalleryUrl "C:\Program Files\PowerShell\7\pwsh.exe"
