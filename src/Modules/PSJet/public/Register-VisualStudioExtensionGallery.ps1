@@ -65,4 +65,3 @@ function Register-VisualStudioExtensionGallery {
         & reg unload "$($instancePath)" | Out-Null
     }
 }
-Register-VisualStudioExtensionGallery -GalleryName "yvcrelast2" -GalleryUrl "C:\Program Files\PowerShell\7\pwsh.exe"
