@@ -49,13 +49,15 @@ function Register-VisualStudioExtensionGallery {
         & reg load "$($instancePath)" "$($visualStudioRegistry.FullName)"
 
         # Add the registry
-        New-Item -Path $galleryPath -Force
+        New-Item -Path $galleryPath -Force | Out-Null
         Set-ItemProperty -Path $galleryPath -Name "(Default)" -Value $encodedGalleryUrl
         Set-ItemProperty -Path $galleryPath -Name "Priority" -Value 100
         Set-ItemProperty -Path $galleryPath -Name "Protocol" -Value ""
         Set-ItemProperty -Path $galleryPath -Name "DisplayName" -Value $GalleryName
 
         # Unload the visual studio hive
+        0 | Out-Null
+        [gc]::collect()
         & reg unload "$($instancePath)"
     }
 }
