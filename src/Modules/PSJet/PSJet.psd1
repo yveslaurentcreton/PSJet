@@ -70,11 +70,6 @@ ScriptsToProcess = @('.\setup\PreInstall.ps1')
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-    'Invoke-ElevatePowerShellAsAdmin',
-    'Invoke-ElevateWindowsPowerShellAsAdmin',
-    'Invoke-PowerShellAsAdmin',
-    'Invoke-RemoteApp',
-    'Invoke-WindowsPowerShellAsAdmin',
     'Add-TrustedHost',
     'Get-DownloadsFolder',
     'Get-HostName',
@@ -84,6 +79,12 @@ FunctionsToExport = @(
     'Install-Chocolatey',
     'Install-GitHubRelease',
     'Invoke-DownloadGitHubRelease',
+    'Invoke-ElevatePowerShellAsAdmin',
+    'Invoke-ElevateWindowsPowerShellAsAdmin',
+    'Invoke-PowerShellAsAdmin',
+    'Invoke-RemoteApp',
+    'Invoke-WakeOnLan',
+    'Invoke-WindowsPowerShellAsAdmin',
     'New-ShortCut',
     'Register-AppAsAdmin',
     'Register-VisualStudioExtensionGallery'
