@@ -72,6 +72,7 @@ ScriptsToProcess = @('.\setup\PreInstall.ps1')
 FunctionsToExport = @(
     'Add-TrustedHost',
     'Get-DownloadsFolder',
+    'Get-EndOfLifeInfo',
     'Get-HostName',
     'Get-InvocationScriptName',
     'Get-IsElevatedAsAdmin',
