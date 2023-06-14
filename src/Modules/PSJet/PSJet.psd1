@@ -91,6 +91,7 @@ FunctionsToExport = @(
     'Register-VisualStudioExtensionGallery',
     'Test-IsChocolateyInstalled',
     'Test-IsElevatedAsAdmin',
+    'Test-IsUserAdmin',
     'Test-IsWindows10',
     'Test-IsWindows11',
     'Test-IsWinGetInstalled'
