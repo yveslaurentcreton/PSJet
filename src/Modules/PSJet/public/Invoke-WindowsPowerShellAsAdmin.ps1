@@ -1,34 +1,48 @@
 <#
-    .SYNOPSIS
-    This function starts a new process of Windows PowerShell with administrator privileges.
+.SYNOPSIS
+    Invokes a Windows PowerShell script as an administrator.
 
-    .DESCRIPTION
-    The function takes in a parameter, Script, which is the path to the Windows PowerShell script to be run with administrator privileges. The function sets the $scriptArgument variable based on whether the $Script parameter is provided or not. The function then starts a new process of Windows PowerShell using the Start-Process cmdlet with the 'RunAs' verb and the argument list of "-ExecutionPolicy Bypass $scriptArgument".
+.DESCRIPTION
+    The Invoke-WindowsPowerShellAsAdmin function starts a new Windows PowerShell process with administrative privileges 
+    and executes the provided script in the new elevated session. If the user does not have administrative privileges, 
+    the function throws an error.
 
-    .PARAMETER Script
-    The path to the Windows PowerShell script to be run with administrator privileges.
+.PARAMETER ScriptFileName
+    The name of the PowerShell script file to be executed. This should be the full path to the file.
 
-    .EXAMPLE
-    Invoke-WindowsPowerShellAsAdmin -Script "C:\Scripts\AdminScript.ps1"
+.EXAMPLE
+    Invoke-WindowsPowerShellAsAdmin -Script "C:\Path\to\your\script.ps1"
+    
+    Runs the specified Windows PowerShell script as an administrator.
 
-    .NOTES
-    The function uses the Start-Process cmdlet to start a new process of Windows PowerShell with administrator privileges.
+.INPUTS
+    String
 
-    .OUTPUTS
-    None
+.OUTPUTS
+    None. This function does not return a value. The output will be whatever the invoked script outputs.
+
+.NOTES
+    This function requires the user to have administrator privileges. If the user does not have administrator privileges, 
+    the function will throw an error.
 #>
 function Invoke-WindowsPowerShellAsAdmin {
     param (
         [Parameter()]
-        [string]$Script
+        [string]$ScriptFileName
     )
 
-    if ($Script) {
-        $scriptArgument = "-File `"$($scriptFilename)`""
+    if (-Not (Test-IsElevatedAsAdmin))
+    {
+        Write-Error "Unable to create Windows PowerShell session with administrator privileges. The current user does not have administrator privileges." -ErrorAction Stop
+    }
+
+    if ($ScriptFileName) {
+        $scriptArgument = "-File `"$($ScriptFileName)`""
     }
     else {
         $scriptArgument = ""
     }
 
+    Write-Verbose "Starting a new Windows PowerShell process with the following argument: $scriptArgument"
     Start-Process powershell -Verb RunAs -ArgumentList "-ExecutionPolicy Bypass $scriptArgument"
 }
