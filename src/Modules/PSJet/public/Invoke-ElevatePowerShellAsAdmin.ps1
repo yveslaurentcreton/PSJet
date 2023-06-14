@@ -18,7 +18,7 @@
 #>
 function Invoke-ElevatePowerShellAsAdmin {
 
-    if (-Not (Get-IsElevatedAsAdmin))
+    if (-Not (Test-IsElevatedAsAdmin))
     {
         if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000)
         {

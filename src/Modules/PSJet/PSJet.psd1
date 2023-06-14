@@ -75,10 +75,10 @@ FunctionsToExport = @(
     'Get-EndOfLifeInfo',
     'Get-HostName',
     'Get-InvocationScriptName',
-    'Get-IsElevatedAsAdmin',
     'Get-VMIpAddress',
     'Install-Chocolatey',
     'Install-GitHubRelease',
+    'Install-WinGet',
     'Invoke-DownloadGitHubRelease',
     'Invoke-ElevatePowerShellAsAdmin',
     'Invoke-ElevateWindowsPowerShellAsAdmin',
@@ -89,8 +89,10 @@ FunctionsToExport = @(
     'New-ShortCut',
     'Register-AppAsAdmin',
     'Register-VisualStudioExtensionGallery',
+    'Test-IsElevatedAsAdmin',
     'Test-IsWindows10',
-    'Test-IsWindows11'
+    'Test-IsWindows11',
+    'Test-IsWinGetInstalled'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
