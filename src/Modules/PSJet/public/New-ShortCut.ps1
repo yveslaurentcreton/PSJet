@@ -19,7 +19,6 @@
     .NOTES
     This function requires the use of the WScript.Shell object and therefore only works on Windows systems.
 #>
-
 function New-Shortcut {
     [CmdletBinding(SupportsShouldProcess=$True, ConfirmImpact='Low')]
     param (
