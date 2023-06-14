@@ -23,18 +23,18 @@ function Install-WinGet {
         $repository = "winget-cli"
         $asset = "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
         
-        Write-Host "Downloading and installing winget..."
+        Write-Host "Downloading and installing WinGet..."
         Install-GitHubRelease -Owner $owner -Repository $repository -Asset $asset
         
         # Verify installation
         $wingetInstalled = Test-IsWinGetInstalled
         
         if ($wingetInstalled) {
-            Write-Host 'winget installed successfully.'
+            Write-Host 'WinGet installed successfully.'
         } else {
-            Write-Host 'Failed to install winget.'
+            Write-Host 'Failed to install WinGet.'
         }
     } else {
-        Write-Host 'winget is already installed.'
+        Write-Host 'WinGet is already installed.'
     }
 }

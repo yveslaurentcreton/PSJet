@@ -89,6 +89,7 @@ FunctionsToExport = @(
     'New-ShortCut',
     'Register-AppAsAdmin',
     'Register-VisualStudioExtensionGallery',
+    'Test-IsChocolateyInstalled',
     'Test-IsElevatedAsAdmin',
     'Test-IsWindows10',
     'Test-IsWindows11',
