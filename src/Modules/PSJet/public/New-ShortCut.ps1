@@ -28,7 +28,7 @@ function New-Shortcut {
         [string]$ShortcutLocation
     )
 
-    if (!(ShouldProcess $ShortcutLocation "Create Shortcut")) {
+    if (!($PSCmdlet.ShouldProcess($ShortcutLocation, "Create Shortcut"))) {
         return
     }
 
