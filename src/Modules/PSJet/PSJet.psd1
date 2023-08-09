@@ -71,6 +71,7 @@ ScriptsToProcess = @('.\setup\PreInstall.ps1')
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
     'Add-TrustedHost',
+    'Convert-WordToPdf',
     'Get-DownloadsFolder',
     'Get-EndOfLifeInfo',
     'Get-HostName',
@@ -97,7 +98,10 @@ FunctionsToExport = @(
     'Test-IsUserAdmin',
     'Test-IsWindows10',
     'Test-IsWindows11',
-    'Test-IsWinGetInstalled'
+    'Test-IsWinGetInstalled',
+    'Test-PathHasExtension',
+    'Test-PathIsDirectory',
+    'Test-PathIsFile'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
