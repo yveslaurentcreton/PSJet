@@ -18,3 +18,4 @@ jobs:
     name: Deploy
     needs: test
     uses: ./.github/workflows/deploy.yaml
+    secrets: inherit
