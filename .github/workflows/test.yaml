@@ -3,6 +3,11 @@ name: Test
 on:
   workflow_call:
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   test:
     name: Test
