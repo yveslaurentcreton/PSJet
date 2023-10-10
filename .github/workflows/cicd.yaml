@@ -7,13 +7,17 @@ on:
 jobs:
   build:
     name: Build
+    uses: ./.github/workflows/build.yaml
     permissions:
       security-events: write
-    uses: ./.github/workflows/build.yaml
   test:
     name: Test
     needs: build
     uses: ./.github/workflows/test.yaml
+    permissions:
+      contents: read
+      actions: read
+      checks: write
   deploy:
     name: Deploy
     needs: test
