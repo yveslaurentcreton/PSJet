@@ -1,0 +1,29 @@
+name: Cross-Platform Test
+
+on:
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    
+    - name: Setup PowerShell
+      uses: powershell/setup-powershell@v1
+      with:
+        powershell-version: '7.2.0'
+    
+    - name: Run Pester Tests
+      run: |
+        Install-Module Pester -Force -SkipPublisherCheck -Scope CurrentUser
+        Import-Module Pester
+        $result = Invoke-Pester -Path './src/Modules/PSJet/tests/' -Passthru
+        if ($result.FailedCount -gt 0) {
+            throw "$($result.FailedCount) tests failed."
+        }
