@@ -1,15 +1,15 @@
-name: Cross-Platform Test
+name: Test
 
 on:
-  push:
-    branches: ["main", "develop"]
+  workflow_call:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
+    name: Test
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2

@@ -1,0 +1,18 @@
+name: CI/CD
+
+on:
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  build:
+    name: Build
+    uses: .github/workflows/build.yaml
+  test:
+    name: Test
+    needs: build
+    uses: .github/workflows/test.yaml
+  deploy:
+    name: Deploy
+    needs: test
+    uses: .github/workflows/deploy.yaml

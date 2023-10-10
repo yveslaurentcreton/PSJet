@@ -1,8 +1,7 @@
-name: CD PowerShell Gallery
+name: Deploy to PowerShell Gallery
 
 on:
-  push:
-    branches: ["main", "develop"]
+  workflow_call:
 
 jobs:
   build:
