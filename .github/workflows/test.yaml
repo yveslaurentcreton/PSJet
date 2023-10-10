@@ -14,12 +14,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Setup PowerShell
-      uses: powershell/setup-powershell@v1
-      with:
-        powershell-version: '7.2.0'
-    
-    - name: Run Pester Tests
+    - name: Run Tests
+      shell: pwsh
       run: |
         Install-Module Pester -Force -SkipPublisherCheck -Scope CurrentUser
         Import-Module Pester
