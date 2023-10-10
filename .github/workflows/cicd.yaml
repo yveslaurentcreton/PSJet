@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     name: Build
+    permissions:
+      security-events: write
     uses: ./.github/workflows/build.yaml
   test:
     name: Test
