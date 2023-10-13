@@ -5,7 +5,7 @@
     .DESCRIPTION
         The `Register-PSJetInstallerScheduledTask` function creates a new scheduled task 
         that triggers the PSJet installer to run at logon with a delay of 15 seconds.
-        The task is created under the "\PSJet\" path with the name obtained from the `Get-PSJetInstallerName` function.
+        The task is created under the "\PSJet\" path with the name obtained from the `Get-InvocationScriptName` function.
         If a task with the same name already exists, the function will not create a new one.
         PowerShell scripts executed by the task are run with the Bypass execution policy and with the highest privileges.
 
@@ -23,7 +23,7 @@
 #>
 function Register-PSJetInstallerScheduledTask {
     $taskPath = "\PSJet\"
-    $taskName = Get-PSJetInstallerName
+    $taskName = Get-InvocationScriptName
     $installerScheduledTask = (Get-ScheduledTask -TaskPath $taskPath -TaskName $taskName -ErrorAction SilentlyContinue)
 
     if ($null -eq $installerScheduledTask)

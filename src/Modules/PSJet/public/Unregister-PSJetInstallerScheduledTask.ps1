@@ -5,7 +5,7 @@
     .DESCRIPTION
         The `Unregister-PSJetInstallerScheduledTask` function removes the scheduled task related 
         to the PSJet installer if it exists. The task is identified using the "\PSJet\" path 
-        and name obtained from the `Get-PSJetInstallerName` function. No action is taken if 
+        and name obtained from the `Get-InvocationScriptName` function. No action is taken if 
         the task does not exist.
 
     .EXAMPLE
@@ -22,7 +22,7 @@
 #>
 function Unregister-PSJetInstallerScheduledTask {
     $taskPath = "\PSJet\"
-    $taskName = Get-PSJetInstallerName
+    $taskName = Get-InvocationScriptName
     $installerScheduledTask = (Get-ScheduledTask -TaskPath $taskPath -TaskName $taskName -ErrorAction SilentlyContinue)
     $installerScheduledTask | Unregister-ScheduledTask -Confirm:$false
 }

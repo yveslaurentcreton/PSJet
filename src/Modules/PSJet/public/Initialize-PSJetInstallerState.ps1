@@ -29,5 +29,5 @@ function Initialize-PSJetInstallerState {
         Set-Content -Path $stateJsonPath -Value $defaultState -Force
     }
 
-    $Script:State = Get-Content -Path $appData.StateJsonPath | ConvertFrom-Json
+    $Script:PSJetInstallerState = Get-Content -Path $appData.StateJsonPath | ConvertFrom-Json
 }

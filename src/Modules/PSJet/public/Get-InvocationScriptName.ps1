@@ -1,32 +1,33 @@
 <#
     .SYNOPSIS
-    Retrieves the name of the script that invoked the function.
+    Retrieves the script name without path and extension of the script that invoked the function.
 
     .DESCRIPTION
-    The `Get-InvocationScriptName` function retrieves the name of the script file that invoked it. This information can be useful for debugging purposes or for generating log entries that indicate which script is using the function.
+    The `Get-InvocationScriptName` function retrieves the script name (without path and extension) that invoked it.
 
     .PARAMETER None
-
     This function does not take any parameters.
 
     .OUTPUTS
     System.String
-
-    The output of this function is a string that represents the name of the script that invoked the function.
+    The output of this function is a string that represents the name of the script (without path and extension) that invoked the function.
 
     .EXAMPLE
     Get-InvocationScriptName
 
-    This example returns the name of the script that invoked the `Get-InvocationScriptName` function.
+    Description
+    -----------
+    This example returns the name of the script (without path and extension) that invoked the `Get-InvocationScriptName` function.
 
     .NOTES
-    This function relies on the `Get-PSCallStack` cmdlet, which retrieves information about the current call stack. The function filters the call stack information to include only entries that have a `ScriptName` property that is not `$null`, and then selects the last entry in the filtered list. This entry represents the script that invoked the function.
+    This function relies on the `Get-InvocationScript` function to obtain the full path of the invoking script. Ensure that `Get-InvocationScript` is available in the session or script where this function is used. 
 
     .LINK
-    Get-PSCallStack
+    Get-InvocationScript
 #>
 function Get-InvocationScriptName {
-    $invocationScriptName = Get-PSCallStack | Where-Object ScriptName -ne $null | Select-Object -Last 1 | Select-Object ScriptName -ExpandProperty ScriptName
+    $invocationScriptPath = Get-InvocationScript
+    $invocationScriptName = Get-Item $invocationScriptPath | Select-Object -ExpandProperty BaseName
 
     return $invocationScriptName
 }

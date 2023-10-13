@@ -18,9 +18,9 @@
         Returns a custom object representing the current state of the installer.
 #>
 function Get-PSJetInstallerState {
-    if (-Not $Script:State) {
+    if (-Not $Script:PSJetInstallerState) {
         Initialize-PSJetInstallerState
     }
 
-    return $Script:State
+    return $Script:PSJetInstallerState
 }

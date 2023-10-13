@@ -30,7 +30,7 @@ function Invoke-ElevatePowerShellAsAdmin {
         
         if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000)
         {
-            $scriptFilename = Get-InvocationScriptName
+            $scriptFilename = Get-InvocationScript
             Invoke-PowerShellAsAdmin -Script $scriptFilename
             Exit
         }

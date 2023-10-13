@@ -19,7 +19,7 @@ jobs:
       actions: read
       checks: write
   deploy:
-    name: Deploy
+    name: Deploy to PowerShell Gallery
     needs: test
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit

@@ -11,6 +11,15 @@
         after a system restart by registering a scheduled task to re-invoke the installer on user logon. 
         The scheduled task will be unregistered upon successful installation completion.
 
+        During the installation process, individual step scripts are executed in a sequential manner. Execution is achieved via "dot sourcing",
+        which is a method of script execution that runs the script in the current scope. The dot sourcing technique is particularly relevant
+        when scripts modify variables that must retain their changed values in the calling script. The method looks like this:
+
+        . $ScriptPath
+
+        This ensures any variables, functions, or other items defined or modified within the script persist in the calling script's scope
+        after execution, maintaining state and functionality across the different phases of the installation process.
+
     .PARAMETER AsAdmin
         If specified, the installer attempts to self-elevate to run with administrative privileges using the `Invoke-ElevateAsAdmin` function.
 
@@ -60,6 +69,7 @@ function Invoke-PSJetInstaller {
     }
 
     # Set state
+    $installerDirectory = Get-InvocationDirectory
     $steps = Get-ChildItem -Path "$installerDirectory\Steps\*.ps1" | Sort-Object FullName
     $firstStep = $steps | Select-Object -First 1 | Select-Object -ExpandProperty FullName
     $state = Get-PSJetInstallerState
@@ -71,8 +81,8 @@ function Invoke-PSJetInstaller {
         # Set current step
         $currentStep = $nextStep
 
-        # Execute current step
-        & $currentStep
+        # Execute current step via dot sourcing, ensuring persistence of variables and functions in the current scope
+        . $currentStep
 
         # Determine next step
         $nextStep = ($steps | Where-Object FullName -gt $currentStep | Select-Object -First 1)
