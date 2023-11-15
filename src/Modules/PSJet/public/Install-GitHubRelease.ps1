@@ -4,7 +4,7 @@
 
     .DESCRIPTION
     The Install-GitHubRelease function downloads and installs the specified GitHub release asset.
-    The function uses Invoke-DownloadGitHubRelease function to download the asset and appropriate installation methods based on the file extension.
+    The function downloads the asset to the Downloads folder and uses appropriate installation methods based on the file extension.
 
     .PARAMETER Owner
     The name of the GitHub user or organization that owns the repository.
@@ -41,13 +41,14 @@ function Install-GitHubRelease {
         [string]$Tag
     )
 
-    $downloadFileName = Invoke-DownloadGitHubRelease -Owner $Owner -Repository $Repository -Asset $Asset -Tag $Tag
+    $downloadFolder = Get-DownloadsFolder
+    $downloadFileName = Invoke-DownloadGitHubRelease -Owner $Owner -Repository $Repository -Asset $Asset -Tag $Tag -DownloadFolder $downloadFolder
 
     $extension = [System.IO.Path]::GetExtension($downloadFileName)
 
     switch ($extension) {
         ".msi" {
-            Install-MSIProduct -FilePath $downloadFileName
+            Install-MSI -FilePath $downloadFileName
             break
         }
         {".appxbundle", ".msixbundle"} {

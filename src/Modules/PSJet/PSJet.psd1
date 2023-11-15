@@ -51,13 +51,13 @@ PowerShellVersion = '5.1'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @('MSI')
+# RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-ScriptsToProcess = @('.\setup\PreInstall.ps1')
+# ScriptsToProcess = @()
 
 # Type files (.ps1xml) to be loaded when importing this module
 # TypesToProcess = @()
@@ -84,6 +84,7 @@ FunctionsToExport = @(
     'Initialize-PSJetInstallerState',
     'Install-Chocolatey',
     'Install-GitHubRelease',
+    'Install-MSI',
     'Install-WinGet',
     'Invoke-DownloadGitHubRelease',
     'Invoke-ElevateAsAdmin',
