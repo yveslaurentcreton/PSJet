@@ -3,7 +3,7 @@
     Downloads a specific asset from a GitHub release.
 
     .DESCRIPTION
-    This function downloads a specific asset from a GitHub release, based on the specified repository owner, repository name, asset name, and release tag (optional). If no tag is specified, the latest release will be used. The function uses the GitHub API to retrieve information about the release and the Invoke-WebRequest cmdlet to download the specified asset to a specified or default Downloads folder.
+    This function downloads a specific asset from a GitHub release, based on the specified repository owner, repository name, asset name, and release tag (optional). If no tag is specified, the latest release will be used. The function uses the GitHub API to retrieve information about the release and the Invoke-WebRequest cmdlet to download the specified asset to a specified folder or the current folder by default.
 
     .PARAMETER Owner
     The name of the repository owner.
@@ -18,7 +18,7 @@
     The tag name of the release. Optional; if not specified, the latest release will be used.
 
     .PARAMETER DownloadFolder
-    The path to the folder where the asset will be downloaded. Optional; if not specified, the default Downloads folder will be used.
+    The path to the folder where the asset will be downloaded. Optional; if not specified, the asset will be downloaded to the current folder.
 
     .OUTPUTS
     String. The path of the downloaded file.
@@ -55,7 +55,7 @@ function Invoke-DownloadGitHubRelease {
     )
 
     $tagSuffix = if ($Tag) { "tags/$Tag" } else { "latest" }
-    $resolvedDownloadFolder = if ($DownloadFolder) { $DownloadFolder } else { Get-DownloadsFolder }
+    $resolvedDownloadFolder = if ($DownloadFolder) { $DownloadFolder } else { (Get-Location).Path }
 
     $url = "https://api.github.com/repos/$Owner/$Repository/releases/$tagSuffix"
     $latestPowerShellRelease = Invoke-RestMethod -Uri $url -Method Get
