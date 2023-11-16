@@ -40,7 +40,7 @@ function Register-PSJetInstallerScheduledTask {
     {
         $trigger = New-ScheduledTaskTrigger -AtLogOn
         $trigger.Delay = "PT15S"
-        $action = New-ScheduledTaskAction -Execute "PowerShell.exe" -Argument "`"Set-ExecutionPolicy Bypass -Scope Process -Force; & `"`"$InstallerScript`"`"`""
+        $action = New-ScheduledTaskAction -Execute "pwsh.exe" -Argument "-ExecutionPolicy Bypass -Command `"& '$InstallerScript'`""
         
         $installerScheduledTask = Register-ScheduledTask -TaskPath $taskPath -TaskName $taskName -Trigger $trigger -Action $action -RunLevel Highest -Force
     }
