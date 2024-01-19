@@ -99,7 +99,7 @@ FunctionsToExport = @(
     'Invoke-RemoteApp',
     'Invoke-WakeOnLan',
     'Invoke-WindowsPowerShellAsAdmin',
-    'New-ShortCut',
+    'New-WindowsShortcut',
     'Open-DevOpsWorkItem',
     'Register-AppAsAdmin',
     'Register-PSJetInstallerScheduledTask',
