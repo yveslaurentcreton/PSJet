@@ -11,11 +11,9 @@
         Description
         -----------
         Saves the current state to state.json.
-
-    .NOTES
-        State should be stored in the $Script:State variable.
 #>
 function Save-PSJetInstallerState {
     $appData = Get-PSJetInstallerAppData
-    $Script:State | ConvertTo-Json | Set-Content -Path $appData.StateJsonPath -Force
+    $state = Get-PSJetInstallerState
+    $state | ConvertTo-Json | Set-Content -Path $appData.StateJsonPath -Force
 }

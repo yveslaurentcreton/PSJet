@@ -38,9 +38,9 @@
     .NOTES
         - Installation step scripts should reside in "$installerDirectory\Steps\".
         - Scripts must be named to enforce execution order (e.g., 01-FirstStep.ps1, 02-SecondStep.ps1).
-        - Step scripts use `$Script:State` for state management and persistence across restarts.
-        - A step script can request a system restart by assigning `$true` to `$Script:State.restartComputer`.
-        - User prompts on restart can be suppressed by assigning `$true` to `$Script:State.autoRestartComputer`.
+        - Step scripts use `Get-PSJetInstallerState` for state management and persistence across restarts.
+        - A step script can request a system restart by assigning `$true` to `$state.restartComputer`.
+        - User prompts on restart can be suppressed by assigning `$true` to `$state.autoRestartComputer`.
         - The `Invoke-ElevateAsAdmin`, `Register-PSJetInstallerScheduledTask`, and `Unregister-PSJetInstallerScheduledTask` functions 
         should be defined and accessible within the scope of `Invoke-PSJetInstaller`.
 
@@ -69,11 +69,15 @@ function Invoke-PSJetInstaller {
     }
 
     # Set state
+    $state = Get-PSJetInstallerState
     $installerDirectory = Get-InvocationDirectory
     $steps = Get-ChildItem -Path "$installerDirectory\Steps\*.ps1" | Sort-Object FullName
-    $firstStep = $steps | Select-Object -First 1 | Select-Object -ExpandProperty FullName
-    $state = Get-PSJetInstallerState
-    $state.step = $firstStep
+
+    if ($null -eq $state.step) {
+        $firstStep = $steps | Select-Object -First 1 | Select-Object -ExpandProperty FullName
+        $state.step = $firstStep
+    }
+    
     $nextStep = $state.step
 
     while ($null -ne $nextStep) {
@@ -85,8 +89,13 @@ function Invoke-PSJetInstaller {
         . $currentStep
 
         # Determine next step
-        $nextStep = ($steps | Where-Object FullName -gt $currentStep | Select-Object -First 1)
+        $nextStep = ($steps | Where-Object FullName -gt $currentStep | Select-Object -First 1 | Select-Object -ExpandProperty FullName)
         $state.step = $nextStep
+
+        # If the next step is null, the installation is complete
+        if ($null -eq $nextStep) {
+            break
+        }
 
         # Restart computer if required
         if ($EnableRestart -and $state.restartComputer) {
@@ -109,6 +118,11 @@ function Invoke-PSJetInstaller {
         Unregister-PSJetInstallerScheduledTask
     }
 
+    # Remove state
+    $stateAppData = Get-PSJetInstallerAppData
+    Remove-Item -Path $stateAppData.StateJsonPath -Force
+
+    # Finish
     Write-Information 'The software installation is completed.' -InformationAction Continue
     Show-KeyPressPrompt -Message 'Press any key to finish...'
 }
