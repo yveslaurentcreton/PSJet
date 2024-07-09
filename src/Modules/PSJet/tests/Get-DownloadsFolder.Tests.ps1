@@ -1,15 +1,15 @@
-function Get-MacOSVersion {
-    # Get macOS version using sw_vers command
-    $version = (sw_vers -productVersion).Split('.')
-    return [PSCustomObject]@{
-        Major = [int]$version[0]
-        Minor = [int]$version[1]
-        Patch = if ($version.Count -gt 2) { [int]$version[2] } else { 0 }
-    }
-}
-
 BeforeAll {
     Import-Module (Join-Path $PSScriptRoot "../PSJet.psm1")
+
+    function Get-MacOSVersion {
+        # Get macOS version using sw_vers command
+        $version = (sw_vers -productVersion).Split('.')
+        return [PSCustomObject]@{
+            Major = [int]$version[0]
+            Minor = [int]$version[1]
+            Patch = if ($version.Count -gt 2) { [int]$version[2] } else { 0 }
+        }
+    }
 }
 
 Describe "Get-DownloadsFolder" {
