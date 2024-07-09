@@ -25,9 +25,6 @@ function Install-WinGet {
         # Download and install dependencies
         Write-Host "Downloading and installing dependencies for WinGet..."
 
-        # Determine if PowerShell version is less than 7
-        $psVersion = $PSVersionTable.PSVersion
-        
         # Download and install Microsoft.VCLibs.x64.14.00.Desktop.appx
         $vclibsPath = Join-Path -Path $downloadFolder -ChildPath "Microsoft.VCLibs.x64.14.00.Desktop.appx"
         Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile $vclibsPath
