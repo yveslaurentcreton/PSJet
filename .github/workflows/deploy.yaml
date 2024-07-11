@@ -39,3 +39,13 @@ jobs:
       - name: Publish PSJet to PowerShell Gallery
         shell: pwsh
         run: Publish-Module -Path .\src\Modules\PSJet\ -NuGetApiKey ${{ secrets.POWERSHELL_GALLERY_NUGET_APIKEY }}
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: v${{ env.GitVersion_MajorMinorPatch }}
+          release_name: v${{ env.GitVersion_MajorMinorPatch }}
+          draft: false
+          prerelease: false
