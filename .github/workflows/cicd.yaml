@@ -25,3 +25,5 @@ jobs:
     needs: test
     uses: ./.github/workflows/deploy.yaml
     secrets: inherit
+    permissions:
+      contents: write
