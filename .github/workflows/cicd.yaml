@@ -1,0 +1,25 @@
+name: CI/CD
+
+on:
+  push:
+    branches: ["main", "develop"]
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yaml
+    permissions:
+      security-events: write
+  test:
+    name: Test
+    needs: build
+    uses: ./.github/workflows/test.yaml
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+  deploy:
+    name: Deploy to PowerShell Gallery
+    needs: test
+    uses: ./.github/workflows/deploy.yaml
+    secrets: inherit

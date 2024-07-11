@@ -1,0 +1,43 @@
+name: Test
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  test:
+    name: Test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Run Tests
+      shell: pwsh
+      run: |
+        Install-Module Pester -Force -SkipPublisherCheck -Scope CurrentUser
+        Import-Module Pester
+        $result = Invoke-Pester -Path './src/Modules/PSJet/tests/' -OutputFile reports/test-results.xml -OutputFormat JUnitXml -PassThru
+        if ($result.FailedCount -gt 0) {
+            throw "$($result.FailedCount) tests failed."
+        }
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      with:
+        name: PowerShell tests
+        path: reports/test-results.xml
+        reporter: jest-junit
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestResults
+        path: reports/test-results.xml

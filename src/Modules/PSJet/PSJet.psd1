@@ -12,7 +12,7 @@
 RootModule = '.\PSJet.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0.2'
+ModuleVersion = '[[version]]'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -27,7 +27,7 @@ Author = 'Yves-Laurent Creton'
 # CompanyName = 'Unkown'
 
 # Copyright statement for this module
-Copyright = '(c) 2023 Yves-Laurent Creton. All rights reserved.'
+Copyright = '(c) 2024 Yves-Laurent Creton. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'A collection of PowerShell functions for administrative tasks.'
@@ -70,10 +70,54 @@ PowerShellVersion = '5.1'
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = @(
-        'Invoke-ElevateAsAdminPowerShell',
-        'Invoke-ElevateAsAdminWindowsPowerShell',
-        'Invoke-RemoteApp'
-    )
+    'Add-TrustedHost',
+    'Convert-WordToPdf',
+    'Get-DotNetUserSecretsPath',
+    'Get-DownloadsFolder',
+    'Get-EndOfLifeInfo',
+    'Get-HostName',
+    'Get-InvocationDirectory',
+    'Get-InvocationScript',
+    'Get-InvocationScriptName',
+    'Get-PSJetInstallerAppData',
+    'Get-PSJetInstallerProperty',
+    'Get-PSJetInstallerState',
+    'Get-UserInput',
+    'Get-UserOption',
+    'Get-VMIpAddress',
+    'Initialize-PSJetInstallerState',
+    'Install-Chocolatey',
+    'Install-GitHubRelease',
+    'Install-MSI',
+    'Install-WinGet',
+    'Invoke-DownloadGitHubRelease',
+    'Invoke-ElevateAsAdmin',
+    'Invoke-ElevatePowerShellAsAdmin',
+    'Invoke-ElevateWindowsPowerShellAsAdmin',
+    'Invoke-PowerShellAsAdmin',
+    'Invoke-PSJetInstaller',
+    'Invoke-RemoteApp',
+    'Invoke-WakeOnLan',
+    'Invoke-WindowsPowerShellAsAdmin',
+    'New-WindowsShortcut',
+    'Open-DevOpsWorkItem',
+    'Register-AppAsAdmin',
+    'Register-PSJetInstallerScheduledTask',
+    'Register-VisualStudioExtensionGallery',
+    'Save-PSJetInstallerState',
+    'Set-PSJetInstallerProperty',
+    'Show-KeyPressPrompt',
+    'Test-IsChocolateyInstalled',
+    'Test-IsElevatedAsAdmin',
+    'Test-IsUserAdmin',
+    'Test-IsWindows10',
+    'Test-IsWindows11',
+    'Test-IsWinGetInstalled',
+    'Test-PathHasExtension',
+    'Test-PathIsDirectory',
+    'Test-PathIsFile',
+    'Unregister-PSJetInstallerScheduledTask'
+)
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
@@ -114,7 +158,7 @@ PrivateData = @{
         # ReleaseNotes = ''
 
         # Prerelease string of this module
-        # Prerelease = ''
+        Prerelease = '[[prerelease]]'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
