@@ -1,39 +1,25 @@
 # PSJet - PowerShell Jet Tools
 
-Welcome to PSJet, a collection of powerful and efficient PowerShell scripts to help streamline your workflow and automate tasks. PSJet is designed to provide a quick and easy solution for common administrative and development tasks, so you can focus on what really matters.
+PSJet is a PowerShell module that extends the functionality of PowerShell with additional, essential commands not available in the standard library. Designed for IT professionals, PSJet aims to enhance productivity by providing powerful, efficient tools.
 
-The scripts included in PSJet are designed to be fast, reliable, and easy to use. Whether you're a seasoned PowerShell user or just getting started, PSJet is the perfect tool to enhance your productivity.
+## Installation Instructions
 
-With PSJet, you can perform a variety of tasks, including:
-
-- Getting Windows information
-- Automating repetitive tasks
-- And much more!
-
-## Getting Started
-
-To get started with PSJet, simply install the module using the following command:
+To install the PSJet module, execute the following command in PowerShell:
 
 ```powershell
 Install-Module -Name PSJet -Force
 ```
 
-While it is recommended to use PowerShell 7 or above for the best experience, PSJet can also be used with Windows PowerShell.
+While PSJet is compatible with Windows PowerShell, we recommend using PowerShell 7 or later for optimal performance.
 
-### Setup Script
+### Environment Setup
 
-To create an optimal environment for using PSJet, you can run the provided setup script. This script will upgrade PowerShellGet, install WinGet, Windows Terminal, and the latest version of PowerShell, ensuring you have a robust and enjoyable setup.
+To ensure a robust setup, we provide a setup script that updates PowerShellGet, installs WinGet, Windows Terminal, and the latest version of PowerShell. Additionally, the script installs PSJet in both Windows PowerShell and PowerShell 7 or later. Run the script with administrative privileges using this command:
 
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; irm "https://github.com/yveslaurentcreton/PSJet/releases/latest/download/psjet.ps1" | iex
 ```
 
-## Contributions
+## Contributing to PSJet
 
-PSJet is an open-source project and contributions are welcome! If you have a suggestion for a new script or an improvement to an existing one, please open an issue or submit a pull request.
-
-## Support
-
-If you need help using PSJet, please open an issue in the repository and we will be happy to assist you.
-
-Thank you for using PSJet! We hope you find it as useful and efficient as we do.
+We welcome contributions from the community! If you have ideas for new scripts or improvements, please contribute by opening an issue or submitting a pull request on our GitHub repository.

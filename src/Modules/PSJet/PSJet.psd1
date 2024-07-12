@@ -75,6 +75,8 @@ FunctionsToExport = @(
     'Get-DotNetUserSecretsPath',
     'Get-DownloadsFolder',
     'Get-EndOfLifeInfo',
+    'Get-EnvironmentVariable',
+    'Get-EnvironmentVariables',
     'Get-HostName',
     'Get-InvocationDirectory',
     'Get-InvocationScript',
@@ -116,7 +118,8 @@ FunctionsToExport = @(
     'Test-PathHasExtension',
     'Test-PathIsDirectory',
     'Test-PathIsFile',
-    'Unregister-PSJetInstallerScheduledTask'
+    'Unregister-PSJetInstallerScheduledTask',
+    'Update-PSEnvironmentVariables'
 )
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

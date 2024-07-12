@@ -23,12 +23,14 @@ powershell -NoProfile -Command {
   winget install --id "Microsoft.PowerShell" --exact --source "winget" --override "/quiet REGISTER_MANIFEST=1 ENABLE_PSREMOTING=1 ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1"
 }
 
-# Refresh the PATH environment variables
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") 
+# Refresh the environment variables in the current PowerShell session
+powershell -NoProfile -Command {
+  Update-PSEnvironmentVariables
+}
 
 # Install PSJet in PowerShell
 pwsh -NoProfile -Command {
   Install-Module -Name PSJet -AllowPrerelease -Force
 }
 
-Write-Output "Installation complete. You can now use Windows Terminal with PowerShell with PSJet"
+Write-Output "Installation complete. You can now use PSJet with PowerShell in Windows Terminal"
